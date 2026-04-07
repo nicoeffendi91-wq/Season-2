@@ -1,0 +1,10 @@
+username = "nico"
+password = 77
+
+username_id = input("Masukkan username: ")
+password_id = input("Masukkan password: ")
+
+if username == username_id and password == int(password_id):
+    print("Login Berhasil! Welcome.")
+else:
+    print("Username atau Password Anda salah. Akses Anda ditolak.")
