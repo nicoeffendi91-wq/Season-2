@@ -1,0 +1,28 @@
+import random
+
+nyawa = 3
+skor = 0
+pilihan = ["gunting", "batu", "kertas"]
+
+while nyawa > 0:
+    print(f"Nyawa: {nyawa}, Skor: {skor}")
+
+    pemain = input("Pilih salah satu(gunting/batu/kertas): ").lower()
+    if pemain not in pilihan:
+        print("Input tidak valid!")
+
+    musuh = random.choice(pilihan)
+    print(f"\nMusuh memilih: {musuh}")
+    if pemain == musuh:
+        print("Seri!")
+    elif ((pemain == "gunting" and musuh == "kertas") or
+        (pemain == "batu" and musuh == "gunting") or
+        (pemain == "kertas" and musuh == "batu")):
+        print("Menang!")
+        skor += 10
+    else:
+        print("Kalah!")
+        nyawa -= 1
+
+print("\nGame Selesai")
+print("Skor Anda:", skor)
