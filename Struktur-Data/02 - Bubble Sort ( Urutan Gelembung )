@@ -8,7 +8,7 @@ def bubble_sort(arr, ascending=True):
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
     return arr
 
-pilihan = input("Pilih (asc/desc): ").lower()
+pilihan = input("Pilih Satu (asc/desc): ").lower()
 if pilihan == "asc":
     hasil = bubble_sort(data.copy(), ascending=True)
 elif pilihan == "desc":
