@@ -1,0 +1,20 @@
+data = [8, 10, 30, 0, -4, 3]
+
+def bubble_sort(arr, ascending=True):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if (ascending and arr[j] > arr[j + 1]) or (not ascending and arr[j] < arr[j + 1]):
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+pilihan = input("Pilih (asc/desc): ").lower()
+if pilihan == "asc":
+    hasil = bubble_sort(data.copy(), ascending=True)
+elif pilihan == "desc":
+    hasil = bubble_sort(data.copy(), ascending=False)
+else:
+    print("Pilihan tidak valid")
+    exit()
+
+print("Hasil:", hasil)
