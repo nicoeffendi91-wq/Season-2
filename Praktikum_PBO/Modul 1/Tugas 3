@@ -1,0 +1,43 @@
+class Segitiga:
+    def __init__(self, sisi1, sisi2, sisi3, tinggi):
+        self.sisi1 = sisi1
+        self.sisi2 = sisi2
+        self.sisi3 = sisi3
+        self.tinggi = tinggi
+
+    def cekSikuSiku(self):
+        sisi = sorted([self.sisi1, self.sisi2, self.sisi3])
+        if sisi[0]**2 + sisi[1]**2 == sisi[2]**2:
+            return True
+        return False
+
+    def jenisSegitiga(self):
+        if self.sisi1 == self.sisi2 == self.sisi3:
+            return "Segitiga Sama Sisi"
+
+        elif (
+            self.sisi1 == self.sisi2 or
+            self.sisi1 == self.sisi3 or
+            self.sisi2 == self.sisi3):
+            return "Segitiga Sama Kaki"
+
+        else:
+            return "Segitiga Sembarang"
+
+    def info(self):
+        print("\n==== Panjang sisi ====")
+        print("Sisi 1 =", self.sisi1)
+        print("Sisi 2 =", self.sisi2)
+        print("Sisi 3 =", self.sisi3)
+        print("Tinggi =", self.tinggi)
+
+        print("\n[ Jenis:", self.jenisSegitiga(), "]")
+
+        if self.cekSikuSiku():
+            print("Termasuk Segitiga Siku-Siku")
+
+segitiga1 = Segitiga(4, 4, 4, 4)
+segitiga1.info()
+
+segitiga2 = Segitiga(2, 3, 7, 8)
+segitiga2.info()
