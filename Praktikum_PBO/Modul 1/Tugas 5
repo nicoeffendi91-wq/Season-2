@@ -1,0 +1,25 @@
+class HitungFPBKPK:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def fpb(self):
+        x = self.a
+        y = self.b
+        while y != 0:
+            x, y = y, x % y
+        return x
+
+    def kpk(self):
+        return (self.a * self.b) // self.fpb()
+
+    def tampilkan_hasil(self):
+        print(f"Bilangan pertama : {self.a}")
+        print(f"Bilangan kedua   : {self.b}")
+        print(f"FPB              : {self.fpb()}")
+        print(f"KPK              : {self.kpk()}")
+
+
+bilangan = HitungFPBKPK(7, 12)
+
+bilangan.tampilkan_hasil()
