@@ -1,0 +1,47 @@
+import random
+
+class Pintu:
+    def __init__(self):
+        self.status = False
+    def buka(self):
+        if self.status == True:
+            print("Pintu sudah terbuka.")
+        else:
+            self.status = True
+
+            respon = [
+                "nyittt... pintu terbuka perlahan.",
+                "duarr! Pintu terbuka dengan keras.",
+                "Pintu terbuka sendiri... hmmm.",
+                "Angin berhembus saat pintu terbuka.",]
+            print(random.choice(respon))
+
+    def tutup(self):
+        if self.status == False:
+            print("Pintu sudah tertutup.")
+        else:
+            self.status = False
+            
+            respon = [
+                "Pintu tertutup rapat dengan bunyi 'jeglek'.",
+                "DUAR! Pintu menutup sangat keras.",
+                "Pintu menutup sendiri... seolah ada hantu yang menutup.",
+                "Pintu tertutup, lampu di dalam berkedip sebentar.",]
+            print(random.choice(respon))
+
+    def cekStatus(self):
+        if self.status == True:
+            print("Status pintu: TERBUKA")
+        else:
+            print("Status pintu: TERTUTUP")
+
+pintu1 = Pintu()
+
+pintu1.cekStatus()
+pintu1.buka()
+pintu1.buka()
+pintu1.tutup()
+pintu1.buka()
+pintu1.tutup()  
+
+pintu1.cekStatus()
