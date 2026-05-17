@@ -1,0 +1,56 @@
+class TV:
+    def __init__(self):
+        self.status = False
+        self.channel = [
+            "RCTI",
+            "SCTV",
+            "INDOSIAR",
+            "Global TV",
+            "MNCTV",]
+        
+        self.channel_sekarang = 0
+
+    def nyalakan(self):
+        if not self.status:
+            self.status = True
+            print("TV berhasil dinyalakan.")
+        else:
+            print("TV sudah menyala.")
+        
+    def matikan(self):
+        if not self.status:
+            self.status = False
+            print("TV berhasil dimatikan.")
+        else:
+            print("TV sudah mati.")
+        
+    def ganti_channel(self, nomor):
+        if self.status:
+            if 0 <= nomor < len(self.channel):
+                self.channel_sekarang = nomor
+                print("Channel berhasil diganti ke", self.channel[self.channel_sekarang])
+            else:
+                print("channel tidak tersedia.")
+        else:
+            print("TV mati. Nyalakan TV terlebih dahulu.")
+
+    def info(self) -> None:
+        if self.status:
+            print(f"TV menyala")
+            print(f"Channel saat ini: {self.channel[self.channel_sekarang]}")
+        else:
+            print("TV dalam keadaan mati.")
+
+
+tv1 = TV()
+tv1.info()
+print()
+tv1.nyalakan()
+print()
+tv1.ganti_channel(3)
+print()
+tv1.info()
+print()
+tv1.ganti_channel(4)
+tv1.matikan()
+print()
