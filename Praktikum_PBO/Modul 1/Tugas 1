@@ -1,0 +1,36 @@
+class pemainsepakbola:
+    def __init__(self, nama, posisi, nomor_punggung, klub):
+        self.nama = nama
+        self.posisi = posisi
+        self.nomor_punggung = nomor_punggung
+        self.jumlah_gol = 0
+
+    def infopemain(self):
+        print("Nama pemain:", self.nama)
+        print("Posisi pemain:", self.posisi)
+        print("Nomor punggung:", self.nomor_punggung)
+        print("Jumlah gol:", self.jumlah_gol)
+
+    def tambahGol(self, jumlah):
+        self.jumlah_gol = self.jumlah_gol + jumlah
+
+    def ubahPosisi(self, posisi_baru):
+        self.posisi = posisi_baru
+
+
+pemain1 = pemainsepakbola("Rafi", "Striker", 9, "Barcelona FC")
+
+print("=== Data Awal Pemain ===")
+pemain1.infopemain()
+
+print("\n=== Setelah Mencetak Gol ===")
+pemain1.tambahGol(2)
+pemain1.infopemain()
+
+print("\n=== Setelah Ubah Posisi ===")
+pemain1.ubahPosisi("Winger")
+pemain1.infopemain()
+
+print("\n=== Setelah Mencetak Gol ===")
+pemain1.tambahGol(2)
+pemain1.infopemain()
