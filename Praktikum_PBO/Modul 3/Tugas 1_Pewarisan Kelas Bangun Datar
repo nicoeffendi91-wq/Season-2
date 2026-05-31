@@ -1,0 +1,82 @@
+import math
+
+class Shape:  
+    def __init__(self, color, filled):
+        self.__color = color
+        self.__filled = filled
+    def getColor(self):
+        return self.__color
+    def setColor(self, color):
+        self.__color = color
+    def isFilled(self):
+        return self.__filled
+    def setFilled(self, filled):
+        self.__filled = filled
+    def __str__(self):
+        return "Shape[color=" + str(self.__color) + ",filled=" + str(self.__filled) + "]"
+
+class Circle(Shape):
+    def __init__(self, radius, color, filled):
+        super().__init__(color, filled)
+        self.__radius = radius
+    def getRadius(self):
+        return self.__radius
+    def setRadius(self, radius):
+        self.__radius = radius
+    def getArea(self):
+        luas = math.pi * self.__radius * self.__radius
+        return luas
+    def __str__(self):
+        return "Circle[" + super().__str__() + ",radius=" + str(self.__radius) + "]"
+
+class Rectangle(Shape):
+    def __init__(self, width, length, color, filled):
+        super().__init__(color, filled)
+        self.__width = width
+        self.__length = length
+
+    def getWidth(self):
+        return self.__width
+    def setWidth(self, width):
+        self.__width = width
+    def getLength(self):
+        return self.__length
+    def setLength(self, length):
+        self.__length = length
+    def getArea(self):
+        luas = self.__width * self.__length
+        return luas
+    def __str__(self):
+        return "Rectangle[" + super().__str__() + ",width=" + str(self.__width) + ",length=" + str(self.__length) + "]"
+
+class Square(Rectangle):
+    def __init__(self, side, color, filled):
+        super().__init__(side, side, color, filled)
+        self.__side = side
+    def getSide(self):
+        return self.__side
+    def setSide(self, side):
+        self.__side = side
+        super().setWidth(side)
+        super().setLength(side)
+    def setWidth(self, side):
+        self.setSide(side)
+    def setLength(self, side):
+        self.setSide(side)
+    def __str__(self):
+        return "Square[" + super().__str__() + "]"
+
+print("== Shape ==")
+s = Shape("blue", False)
+print(s)
+print("\n== Circle ==")
+c = Circle(5.0, "red", True)
+print(c)
+print("Luas:", round(c.getArea(), 2))
+print("\n== Rectangle ==")
+r = Rectangle(4.0, 6.0, "green", True)
+print(r)
+print("Luas:", r.getArea())
+print("\n== Square ==")
+sq = Square(3.0, "yellow", False)
+print(sq)
