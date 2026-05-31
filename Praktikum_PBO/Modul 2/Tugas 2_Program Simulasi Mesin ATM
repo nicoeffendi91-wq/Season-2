@@ -1,0 +1,42 @@
+class ATM:
+    def __init__(self, pin, location, bankName):
+        self.__PIN = pin
+        self.__location = location
+        self.__BankName = bankName
+        self.__language = "English"
+
+    @property
+    def PIN(self):
+        return self.__PIN
+    @PIN.setter
+    def PIN(self, pin):
+        self.__PIN = pin
+    @property
+    def location(self):
+        return self.__location
+    @location.setter
+    def location(self, location):
+        self.__location = location
+    @property
+    def BankName(self):
+        return self.__BankName
+    @BankName.setter
+    def BankName(self, bankName):
+        self.__BankName = bankName
+    def ValidatePIN(self, pin):
+        if pin == self.__PIN:
+            return True
+        else:
+            return False
+
+    def selectLanguage(self, lang):
+        self.__language = lang
+    def display(self):
+        return f"Bank: {self.__BankName}\nLokasi: {self.__location}\nBahasa: {self.__language}"
+
+atm1 = ATM(1234, "Jl. Raya Valley no 11", "Bank BCA")
+print(atm1.display())
+print(atm1.ValidatePIN(1234))
+print(atm1.ValidatePIN(9999))
+atm1.selectLanguage("Indonesia")
+print(atm1.display())
