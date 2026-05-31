@@ -1,0 +1,63 @@
+class Person:
+    def __init__(self, nama, umur):
+        self.nama = nama
+        self.umur = umur
+
+class Employee(Person):
+    def __init__(self, nama, umur, id_karyawan, gaji_dasar):
+        super().__init__(nama, umur)
+        self.id_karyawan = id_karyawan
+        self.gaji_dasar = gaji_dasar
+
+class Manager(Employee):
+    def __init__(self, nama, umur, id_karyawan, gaji_dasar, tunjangan, departemen):
+        super().__init__(nama, umur, id_karyawan, gaji_dasar)
+        self.tunjangan = tunjangan
+        self.departemen = departemen
+    def total_salary(self):
+        total = self.gaji_dasar + self.tunjangan
+        return total
+
+class Engineer(Employee):
+    def __init__(self, nama, umur, id_karyawan, gaji_dasar, bidang_kerja):
+        super().__init__(nama, umur, id_karyawan, gaji_dasar)
+        self.bidang_kerja = bidang_kerja
+    def total_salary(self):
+        return self.gaji_dasar
+
+class SoftwareEngineer(Engineer):
+    def __init__(self, nama, umur, id_karyawan, gaji_dasar, bidang_kerja, level):
+        super().__init__(nama, umur, id_karyawan, gaji_dasar, bidang_kerja)
+        self.level = level
+    def total_salary(self):
+        if self.level == "junior":
+            total = self.gaji_dasar
+        elif self.level == "middle":
+            total = self.gaji_dasar + 2500000
+        elif self.level == "senior":
+            total = self.gaji_dasar + 5000000
+        else:
+            total = self.gaji_dasar
+        return total
+
+manajer = Manager("Budi Santoso", 35, "001", 8000000, 3000000, "IT")
+se = SoftwareEngineer("Andi Pratama", 28, "002", 9000000, "Software Development", "senior")
+
+print("== Data Manager ==")
+print("Nama        :", manajer.nama)
+print("Umur        :", manajer.umur, "tahun")
+print("ID Karyawan :", manajer.id_karyawan)
+print("Departemen  :", manajer.departemen)
+print("Gaji Dasar  : Rp", manajer.gaji_dasar)
+print("Tunjangan   : Rp", manajer.tunjangan)
+print("Total Gaji  : Rp", manajer.total_salary())
+print()
+print("== Data Software Engineer ==")
+print("Nama        :", se.nama)
+print("Umur        :", se.umur, "tahun")
+print("ID Karyawan :", se.id_karyawan)
+print("Bidang Kerja:", se.bidang_kerja)
+print("Level       :", se.level)
+print("Gaji Dasar  : Rp", se.gaji_dasar)
+print("Total Gaji  : Rp", se.total_salary())
+print()
