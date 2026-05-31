@@ -1,0 +1,24 @@
+class Product:
+    def __init__(self, KodeBarang, Nama, Harga, Jumlah):
+        self.kodeBarang = KodeBarang
+        self.nama = Nama
+        self.harga = Harga
+        self.jumlah = Jumlah
+        
+    def tambahBarang(self, jumlah):
+        self.jumlah += jumlah
+        print(f"Penambahan barang sebanyak {jumlah} berhasil!")
+    def barangKeluar(self, jumlah):
+        self.jumlah -= jumlah
+        print(f"Pengeluaran barang sebanyak {jumlah} berhasil!")
+    def Jumlah(self):
+        return self.jumlah
+    def __str__(self):
+        return (f"Kode barang: {self.kodeBarang}\n"f"Nama barang: {self.nama}\n"f"Harga: Rp {self.harga}\n"f"Jumlah: {self.jumlah}")
+
+prod1 = Product(7, "Rinso", 2000, 20)
+print(prod1)
+prod1.tambahBarang(100)
+print("jumlah produk sekarang:", prod1.Jumlah())
+prod1.barangKeluar(50)
+print("Jumlah produk sekarang:", prod1.Jumlah())
