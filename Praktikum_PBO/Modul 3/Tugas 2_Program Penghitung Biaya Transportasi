@@ -1,0 +1,66 @@
+class Transport:
+    def __init__(self, name, max_speed, fuel_efficiency):
+        self.name = name
+        self.max_speed = max_speed
+        self.fuel_efficiency = fuel_efficiency
+
+class LandTransport(Transport):
+    def __init__(self, name, max_speed, fuel_efficiency, toll_fee, has_air_conditioner):
+        super().__init__(name, max_speed, fuel_efficiency)
+        self.toll_fee = toll_fee
+        self.has_air_conditioner = has_air_conditioner
+    def calculate_cost(self, distance):
+        base_cost = (distance / self.fuel_efficiency) * 5000 + self.toll_fee
+
+        if self.has_air_conditioner == True:
+            total = base_cost + (base_cost * 10 / 100)
+        else:
+            total = base_cost
+        return total
+
+class SeaTransport(Transport):
+    def __init__(self, name, max_speed, fuel_efficiency, crew_required, cabin_class):
+        super().__init__(name, max_speed, fuel_efficiency)
+        self.crew_required = crew_required
+        self.cabin_class = cabin_class
+    def calculate_cost(self, distance):
+        base_cost = (distance / self.fuel_efficiency) * 3000
+        base_cost = base_cost + (200000 * self.crew_required)
+        if self.cabin_class == "economy":
+            total = base_cost
+        elif self.cabin_class == "business":
+            total = base_cost + (base_cost * 20 / 100)
+        elif self.cabin_class == "luxury":
+            total = base_cost + (base_cost * 50 / 100)
+        else:
+            total = base_cost
+        return total
+
+bus = LandTransport("Bus", 100, 8, 50000, True)
+jeep = LandTransport("Jeep", 120, 10, 30000, False)
+cruise = SeaTransport("CruiseShip", 40, 5, 20, "luxury")
+jarak = 200
+
+print("== Informasi Kendaraan dan Biaya Perjalanan (jarak 200 km) ==")
+print()
+print("Nama        :", bus.name)
+print("Max Speed   :", bus.max_speed, "km/jam")
+print("Fuel Eff    :", bus.fuel_efficiency, "km/liter")
+print("Toll Fee    :", bus.toll_fee)
+print("Ada AC      :", bus.has_air_conditioner)
+print("Biaya       : Rp", bus.calculate_cost(jarak))
+print()
+print("Nama        :", jeep.name)
+print("Max Speed   :", jeep.max_speed, "km/jam")
+print("Fuel Eff    :", jeep.fuel_efficiency, "km/liter")
+print("Toll Fee    :", jeep.toll_fee)
+print("Ada AC      :", jeep.has_air_conditioner)
+print("Biaya       : Rp", jeep.calculate_cost(jarak))
+print()
+print("Nama        :", cruise.name)
+print("Max Speed   :", cruise.max_speed, "km/jam")
+print("Fuel Eff    :", cruise.fuel_efficiency, "km/liter")
+print("Crew        :", cruise.crew_required, "orang")
+print("Kelas Kabin :", cruise.cabin_class)
+print("Biaya       : Rp", cruise.calculate_cost(jarak))
+print()
