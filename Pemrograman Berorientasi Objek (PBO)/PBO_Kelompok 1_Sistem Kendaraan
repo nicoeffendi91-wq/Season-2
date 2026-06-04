@@ -1,0 +1,78 @@
+class Kendaraan:
+    def __init__(self, merk, tahun, warna):
+        self.merk = merk
+        self.tahun = tahun
+        self.warna = warna
+
+    def tampilSpesifikasi(self):
+        print("Merk  :", self.merk)
+        print("Tahun :", self.tahun)
+        print("Warna :", self.warna)
+
+class Mobil(Kendaraan):
+    def __init__(self, merk, tahun, warna, jumlahPintu):
+        super().__init__(merk, tahun, warna)
+        self.jumlahPintu = jumlahPintu
+
+    def tampilSpesifikasi(self):
+        print("\n=== Data Mobil ===")
+        print("Merk         :", self.merk)
+        print("Tahun        :", self.tahun)
+        print("Warna        :", self.warna)
+        print("Jumlah Pintu :", self.jumlahPintu)
+
+
+class Motor(Kendaraan):
+    def __init__(self, merk, tahun, warna, jenisMotor):
+        super().__init__(merk, tahun, warna)
+        self.jenisMotor = jenisMotor
+
+    def tampilSpesifikasi(self):
+        print("\n=== Data Motor ===")
+        print("Merk         :", self.merk)
+        print("Tahun        :", self.tahun)
+        print("Warna        :", self.warna)
+        print("Jenis Motor  :", self.jenisMotor)
+
+
+class Bus(Kendaraan):
+    def __init__(self, merk, tahun, warna, kapasitasPenumpang):
+        super().__init__(merk, tahun, warna)
+        self.kapasitasPenumpang = kapasitasPenumpang
+
+    def tampilSpesifikasi(self):
+        print("\n=== Data Bus ===")
+        print("Merk                 :", self.merk)
+        print("Tahun                :", self.tahun)
+        print("Warna                :", self.warna)
+        print("Kapasitas Penumpang  :", self.kapasitasPenumpang)
+
+# Input data kendaraan
+print("=== INPUT DATA MOBIL ===")
+merk = input("Merk Mobil : ")
+tahun = int(input("Tahun Mobil : "))
+warna = input("Warna Mobil : ")
+jumlahPintu = int(input("Jumlah Pintu : "))
+
+mobil = Mobil(merk, tahun, warna, jumlahPintu)
+
+print("\n=== INPUT DATA MOTOR ===")
+merk = input("Merk Motor : ")
+tahun = int(input("Tahun Motor : "))
+warna = input("Warna Motor : ")
+jenisMotor = input("Jenis Motor : ")
+
+motor = Motor(merk, tahun, warna, jenisMotor)
+
+print("\n=== INPUT DATA BUS ===")
+merk = input("Merk Bus : ")
+tahun = int(input("Tahun Bus : "))
+warna = input("Warna Bus : ")
+kapasitasPenumpang = int(input("Kapasitas Penumpang : "))
+
+bus = Bus(merk, tahun, warna, kapasitasPenumpang)
+
+print("\n===== HASIL DATA KENDARAAN =====")
+mobil.tampilSpesifikasi()
+motor.tampilSpesifikasi()
+bus.tampilSpesifikasi()
