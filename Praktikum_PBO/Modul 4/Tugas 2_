@@ -1,0 +1,59 @@
+import math
+
+class MyPoint:
+    def __init__(self, x=0, y=0):
+        self.__x = x
+        self.__y = y
+    def getX(self):
+        return self.__x
+    def setX(self, x):
+        self.__x = x
+    def getY(self):
+        return self.__y
+    def setY(self, y):
+        self.__y = y
+    def setXY(self, x, y):
+        self.__x = x
+        self.__y = y
+    def getXY(self):
+        return [self.__x, self.__y]
+    def toString(self):
+        return f"({self.__x}, {self.__y})"
+    def distance(self, another):
+        xDiff = self.__x - another.getX()
+        yDiff = self.__y - another.getY()
+        return math.sqrt((xDiff ** 2) + (yDiff ** 2))
+
+print("===== Pengetesan Class MyPoint =====")
+print()
+p1 = MyPoint()
+print("Objek p1 dibuat dengan nilai default:")
+print("p1 =", p1.toString())
+print()
+p2 = MyPoint(3, 4)
+print("Objek p2 dibuat dengan koordinat (3, 4):")
+print("p2 =", p2.toString())
+print()
+
+print("Getter p2:")
+print("getX() =", p2.getX())
+print("getY() =", p2.getY())
+print()
+p2.setX(6)
+p2.setY(8)
+print("Setelah setX(6) dan setY(8):")
+print("p2 =", p2.toString())
+print()
+p2.setXY(3, 4)
+print("Setelah setXY(3, 4):")
+print("p2 =", p2.toString())
+print()
+print("getXY() p2 =", p2.getXY())
+print()
+
+print("Menghitung jarak antara p1 dan p2:")
+print("p1 =", p1.toString())
+print("p2 =", p2.toString())
+jarak = p1.distance(p2)
+print(f"Jarak p1 ke p2 = {jarak}")
+print()
