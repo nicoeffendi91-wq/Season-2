@@ -1,0 +1,54 @@
+class Tabungan:
+    def __init__(self, saldo):
+        self.__saldo = saldo
+    def getSaldo(self):
+        return self.__saldo
+    def simpanUang(self, jumlah):
+        self.__saldo += jumlah
+    def ambilUang(self, jumlah):
+        if jumlah <= self.__saldo:
+            self.__saldo -= jumlah
+            return True
+        return False
+
+class Nasabah:
+    def __init__(self, namaAwal, namaAkhir):
+        self.__namaAwal = namaAwal
+        self.__namaAkhir = namaAkhir
+        self.__tabungan = None
+    def getNamaAwal(self):
+        return self.__namaAwal
+    def getNamaAkhir(self):
+        return self.__namaAkhir
+    def getTabungan(self):
+        return self.__tabungan
+    def setTabungan(self, tabungan):
+        self.__tabungan = tabungan
+
+class Bank:
+    def __init__(self):
+        self.__nasabah = []
+    def tambahNasabah(self, namaAwal, namaAkhir):
+        self.__nasabah.append(Nasabah(namaAwal, namaAkhir))
+    def getJumlahNasabah(self):
+        return len(self.__nasabah)
+    def getNasabah(self, indeks):
+        return self.__nasabah[indeks]
+
+bank = Bank()
+
+bank.tambahNasabah("Malik", "Ibrahim")
+bank.getNasabah(0).setTabungan(Tabungan(500000))
+bank.tambahNasabah("Tutik", "Amaliah")
+bank.getNasabah(1).setTabungan(Tabungan(300000))
+bank.tambahNasabah("Wahid", "Elyasa")
+bank.getNasabah(2).setTabungan(Tabungan(100000))
+
+print("Jumlah nasabah:", bank.getJumlahNasabah())
+for i in range(bank.getJumlahNasabah()):
+    print(
+        f"Nasabah ke-{i+1}: "
+        f"{bank.getNasabah(i).getNamaAwal()} "
+        f"{bank.getNasabah(i).getNamaAkhir()} ; "
+        f"Saldo: Rp {bank.getNasabah(i).getTabungan().getSaldo()}"
+    )
