@@ -1,78 +1,119 @@
+# Class induk (Parent Class)
 class Kendaraan:
     def __init__(self, merk, tahun, warna):
         self.merk = merk
         self.tahun = tahun
         self.warna = warna
-
     def tampilSpesifikasi(self):
-        print("Merk  :", self.merk)
-        print("Tahun :", self.tahun)
-        print("Warna :", self.warna)
+        pass
 
 class Mobil(Kendaraan):
     def __init__(self, merk, tahun, warna, jumlahPintu):
         super().__init__(merk, tahun, warna)
         self.jumlahPintu = jumlahPintu
-
     def tampilSpesifikasi(self):
-        print("\n=== Data Mobil ===")
-        print("Merk         :", self.merk)
-        print("Tahun        :", self.tahun)
-        print("Warna        :", self.warna)
-        print("Jumlah Pintu :", self.jumlahPintu)
-
+        print(f"Mobil - Merk: {self.merk}, Tahun: {self.tahun}, "
+              f"Warna: {self.warna}, Pintu: {self.jumlahPintu}")
 
 class Motor(Kendaraan):
     def __init__(self, merk, tahun, warna, jenisMotor):
         super().__init__(merk, tahun, warna)
         self.jenisMotor = jenisMotor
-
     def tampilSpesifikasi(self):
-        print("\n=== Data Motor ===")
-        print("Merk         :", self.merk)
-        print("Tahun        :", self.tahun)
-        print("Warna        :", self.warna)
-        print("Jenis Motor  :", self.jenisMotor)
-
+        print(f"Motor - Merk: {self.merk}, Tahun: {self.tahun}, "
+              f"Warna: {self.warna}, Jenis: {self.jenisMotor}")
 
 class Bus(Kendaraan):
     def __init__(self, merk, tahun, warna, kapasitasPenumpang):
         super().__init__(merk, tahun, warna)
         self.kapasitasPenumpang = kapasitasPenumpang
-
     def tampilSpesifikasi(self):
-        print("\n=== Data Bus ===")
-        print("Merk                 :", self.merk)
-        print("Tahun                :", self.tahun)
-        print("Warna                :", self.warna)
-        print("Kapasitas Penumpang  :", self.kapasitasPenumpang)
+        print(f"Bus - Merk: {self.merk}, Tahun: {self.tahun}, "
+              f"Warna: {self.warna}, Kapasitas: {self.kapasitasPenumpang} orang")
 
-# Input data kendaraan
-print("=== INPUT DATA MOBIL ===")
-merk = input("Merk Mobil : ")
-tahun = int(input("Tahun Mobil : "))
-warna = input("Warna Mobil : ")
-jumlahPintu = int(input("Jumlah Pintu : "))
+riwayat_kendaraan = []
 
-mobil = Mobil(merk, tahun, warna, jumlahPintu)
+while True:
+    print("\n=============================")
+    print("   SISTEM DATA KENDARAAN")
+    print("=============================")
+    print("1. Tambah Kendaraan")
+    print("2. Cari Kendaraan berdasarkan Merk")
+    print("3. Tampilkan Semua Kendaraan")
+    print("4. Urutkan Kendaraan berdasarkan Tahun Terbaru")
+    print("5. Keluar")
+    print("=============================")
 
-print("\n=== INPUT DATA MOTOR ===")
-merk = input("Merk Motor : ")
-tahun = int(input("Tahun Motor : "))
-warna = input("Warna Motor : ")
-jenisMotor = input("Jenis Motor : ")
+    pilihan = input("Pilih menu (1-5): ")
 
-motor = Motor(merk, tahun, warna, jenisMotor)
+    # Tambah Kendaraan
+    if pilihan == "1":
+        print("\nJenis Kendaraan:")
+        print("1. Mobil")
+        print("2. Motor")
+        print("3. Bus")
 
-print("\n=== INPUT DATA BUS ===")
-merk = input("Merk Bus : ")
-tahun = int(input("Tahun Bus : "))
-warna = input("Warna Bus : ")
-kapasitasPenumpang = int(input("Kapasitas Penumpang : "))
+        jenis = input("Pilih jenis: ")
+        merk = input("Merk  : ")
+        tahun = int(input("Tahun : "))
+        warna = input("Warna : ")
 
-bus = Bus(merk, tahun, warna, kapasitasPenumpang)
+        if jenis == "1":
+            pintu = int(input("Jumlah Pintu : "))
+            riwayat_kendaraan.append(
+                Mobil(merk, tahun, warna, pintu))
+        elif jenis == "2":
+            jenisMotor = input("Jenis Motor : ")
+            riwayat_kendaraan.append(
+                Motor(merk, tahun, warna, jenisMotor))
+        elif jenis == "3":
+            kapasitas = int(input("Kapasitas Penumpang : "))
+            riwayat_kendaraan.append(
+                Bus(merk, tahun, warna, kapasitas))
+        else:
+            print("Jenis kendaraan tidak valid!")
+            continue
 
-print("\n===== HASIL DATA KENDARAAN =====")
-mobil.tampilSpesifikasi()
-motor.tampilSpesifikasi()
-bus.tampilSpesifikasi()
+        print("Data berhasil ditambahkan!")
+
+    # Cari berdasarkan merk
+    elif pilihan == "2":
+        cari = input("Masukkan merk yang dicari: ").lower()
+        ditemukan = False
+
+        print("\n= HASIL PENCARIAN =")
+        for kendaraan in riwayat_kendaraan:
+            if cari in kendaraan.merk.lower():
+                kendaraan.tampilSpesifikasi()
+                ditemukan = True
+        if not ditemukan:
+            print("Data tidak ditemukan.")
+
+    # Tampilkan semua kendaraan
+    elif pilihan == "3":
+        print("\n= DAFTAR KENDARAAN =")
+
+        if len(riwayat_kendaraan) == 0:
+            print("Belum ada data.")
+        else:
+            for i, kendaraan in enumerate(riwayat_kendaraan, 1):
+                print(f"{i}. ", end="")
+                kendaraan.tampilSpesifikasi()
+
+    # Urutkan tahun terbaru
+    elif pilihan == "4":
+        riwayat_kendaraan.sort(
+            key=lambda kendaraan: kendaraan.tahun,
+            reverse=True)
+
+        print("\n= DATA BERHASIL DIURUTKAN =")
+        for i, kendaraan in enumerate(riwayat_kendaraan, 1):
+            print(f"{i}. ", end="")
+            kendaraan.tampilSpesifikasi()
+
+    # Keluar
+    elif pilihan == "5":
+        print("Program selesai.")
+        break
+    else:
+        print("Pilihan tidak valid!")
