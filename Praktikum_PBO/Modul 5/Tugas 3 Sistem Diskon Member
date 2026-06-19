@@ -1,0 +1,104 @@
+from datetime import date
+
+class Customer:
+    def __init__(self, name: str, member: bool = False, memberType: str = None):
+        self.name = name
+        self.member = member
+        self.memberType = memberType if member else None
+    def setMember(self, member: bool):
+        self.member = member
+        if not member:
+            self.memberType = None
+    def setMemberType(self, memberType: str):
+        validTypes = ["Premium", "Gold", "Silver"]
+        if memberType in validTypes:
+            self.member = True
+            self.memberType = memberType
+        else:
+            raise ValueError("Invalid member type")
+    def isMember(self) -> bool:
+        return self.member
+    def getMemberType(self) -> str:
+        return self.memberType
+    def getServiceDiscount(self) -> float:
+        return DiscountRate.getServiceDiscount(self.memberType)
+    def getProductDiscount(self) -> float:
+        return DiscountRate.getProductDiscount(self.memberType)
+    def __str__(self):
+        if self.member:
+            return f"{self.name} ({self.memberType} Member)"
+        return f"{self.name} (Non-Member)"
+
+class Visit:
+    def __init__(self, customer: Customer, visit_date: date):
+        self.customer = customer
+        self.date = visit_date
+        self.serviceExpense = 0.0
+        self.productExpense = 0.0
+    def setServiceExpense(self, amount: float):
+        self.serviceExpense = amount
+    def setProductExpense(self, amount: float):
+        self.productExpense = amount
+    def getTotalExpense(self) -> float:
+        serviceDiscount = self.customer.getServiceDiscount()
+        productDiscount = self.customer.getProductDiscount()
+
+        netService = self.serviceExpense * (1 - serviceDiscount)
+        netProduct = self.productExpense * (1 - productDiscount)
+        return netService + netProduct
+    def __str__(self):
+        return (
+            f"Visit on {self.date}\n"
+            f"Customer : {self.customer}\n"
+            f"Service  : Rp.{self.serviceExpense:.2f}\n"
+            f"Product  : Rp.{self.productExpense:.2f}\n"
+            f"----------------------------- (+)\n"
+            f"Total    : Rp.{self.getTotalExpense():.2f}")
+
+class DiscountRate:
+    serviceDiscounts = {
+        "Premium": 0.20,
+        "Gold": 0.15,
+        "Silver": 0.10}
+
+    productDiscount = 0.10
+
+    @staticmethod
+    def getServiceDiscount(memberType: str) -> float:
+        return DiscountRate.serviceDiscounts.get(memberType, 0.0)
+    @staticmethod
+    def getProductDiscount(memberType: str) -> float:
+        return (
+            DiscountRate.productDiscount
+            if memberType in DiscountRate.serviceDiscounts
+            else 0.0)
+
+Vallery = Customer("Vallery", True, "Premium")
+
+visit1 = Visit(Vallery, date.today())
+visit1.setServiceExpense(30000)
+visit1.setProductExpense(550000)
+
+print(visit1)
+print()
+
+xero = Customer("Xero")
+xero.setMemberType("Gold")
+
+visit2 = Visit(xero, date.today())
+visit2.setServiceExpense(35000)
+visit2.setProductExpense(550000)
+
+print(visit2)
+print()
+
+
+# Silver Member
+Felix = Customer("Felix")
+Felix.setMemberType("Silver")
+
+visit3 = Visit(Felix, date.today())
+visit3.setServiceExpense(20000)
+visit3.setProductExpense(1000000)
+
+print(visit3)
