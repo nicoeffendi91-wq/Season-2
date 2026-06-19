@@ -1,0 +1,51 @@
+class Patient:
+    def __init__(self, nama, umur, urgent):
+        self.nama = nama
+        self.umur = umur
+        self.urgent = urgent
+
+        if urgent > 10 or urgent < 1:
+            raise ValueError("Urgent level must be between 1 and 10")
+    def __str__(self):
+        return (
+            f"Pasien : {self.nama}\n"
+            f"Umur : {self.umur}\n"
+            f"Tingkat Urgensi : {self.urgent}\n"
+        )
+class HospitalQueue:
+    def __init__(self):
+        self.queue = []
+    def addPatient(self, patient: Patient):
+        self.queue.append(patient)
+        self.queue.sort(key=lambda p: p.urgent, reverse=True)
+    def getNextPatient(self):
+        if self.queue:
+            return self.queue.pop(0)
+        else:
+            raise ValueError("Antrian pasien kosong.")
+    def displayQueue(self):
+        if not self.queue:
+            print("No patient left")
+        else:
+            for i, patient in enumerate(self.queue, start=1):
+                print(f"{i}. {patient}")
+
+p1 = Patient("Friski", 11, 6)
+p2 = Patient("Bima", 22, 5)
+p3 = Patient("bagas", 24, 12)
+
+rs = HospitalQueue()
+print("Pasien diurutkan sesuai tingkat urgensi")
+
+rs.addPatient(p1)
+rs.addPatient(p2)
+rs.addPatient(p3)
+rs.displayQueue()
+
+print("\nPasien berikutnya:\n")
+next_patient = rs.getNextPatient()
+if next_patient:
+    print(next_patient)
+
+print("Antrian setelah satu pasien ditangani:")
+rs.displayQueue()
