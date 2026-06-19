@@ -1,0 +1,41 @@
+class UsernameError(Exception):
+    def __init__(self, username):
+        self.username = username
+    def __str__(self):
+        return f"Username '{self.username}' tidak valid! Minimal 5 karakter dan tidak boleh mengandung spasi."
+
+def validasi_username(username):
+    if len(username) < 5 or " " in username:
+        raise UsernameError(username)
+    return "Username valid"
+try:
+    user = input("Masukkan username: ")
+    print(validasi_username(user))
+except UsernameError as e:
+    print(e)
+
+class SaldoTidakCukupError(Exception):
+    def __init__(self, saldo, pembayaran):
+        self.saldo = saldo
+        self.pembayaran = pembayaran
+    def __str__(self):
+        kurang = self.pembayaran - self.saldo
+        return f"Saldo kurang Rp{kurang:,}"
+def bayar(saldo, pembayaran):
+    if pembayaran > saldo:
+        raise SaldoTidakCukupError(saldo, pembayaran)
+
+    return saldo - pembayaran
+
+# Main Program
+try:
+    saldo = int(input("Masukkan saldo: "))
+    bayar_uang = int(input("Masukkan jumlah pembayaran: "))
+
+    sisa = bayar(saldo, bayar_uang)
+
+    print(f"Pembayaran berhasil")
+    print(f"Sisa saldo: Rp{sisa:,}")
+
+except SaldoTidakCukupError as e:
+    print(e)
