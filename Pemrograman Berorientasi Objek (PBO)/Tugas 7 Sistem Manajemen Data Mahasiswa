@@ -1,0 +1,56 @@
+class mahasiswa:
+    def __init__(self, nama, nim, prodi):
+        self.nama = nama
+        self.nim = nim
+        self.prodi = prodi
+
+data = []
+
+while True:
+    print("\n========= MENU =========")
+    print("1. Tambah Data Mahasiswa")
+    print("2. Lihat Data Mahasiswa")
+    print("3. Hapus Data Mahasiswa")
+    print("4. Keluar")
+
+    pilihan = input("Pilih menu: ")
+
+
+    if pilihan == "1":
+        nama = input("Masukkan nama: ")
+        nim = input("Masukkan NIM: ")
+        prodi = input("Masukkan Prodi: ")
+        mhs = mahasiswa(nama, nim, prodi)
+        data.append(mhs)
+        print("Data berhasil ditambahkan.")
+
+    elif pilihan == "2":
+        if len(data) == 0:
+            print("\n==== Tidak Ada Data ====.")
+        else:
+            print("\n==== Daftar Mahasiswa ====")
+            for i, mhs in enumerate(data):
+                print(f"{i}. Nama: {mhs.nama}, NIM: {mhs.nim}, Prodi: {mhs.prodi}")
+
+    elif pilihan == "3":
+        if len(data) == 0:
+            print("\n==== Tidak Ada Data ====.")
+        else:
+            print("\n==== Data Mahasiswa ====")
+            for i, mhs in enumerate(data):
+                print(f"{i}. {mhs.nama} - {mhs.nim} - {mhs.prodi}")
+
+            index = int(input("Masukkan indeks dari Mahasiswa yang ingin dihapus: "))
+
+            if 0 <= index < len(data):
+                data.pop(index)
+                print("Data berhasil dihapus.")
+            else:
+                print("Index tidak valid.")
+
+    elif pilihan == "4":
+        print("Program selesai.")
+        break
+
+    else:
+        print("Pilihan tidak valid.")
