@@ -1,0 +1,10 @@
+try:
+    import modul_tidak_ada
+except ImportError:
+    print("Error: Modul yang diimport tidak ditemukan.")
+
+
+try:
+    from math import akar
+except ImportError:
+    print("Error: Submodul atau fungsi yang diimport tidak ada di dalam modul.")
