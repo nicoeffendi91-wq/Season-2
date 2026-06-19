@@ -1,0 +1,107 @@
+class InvalidRoomError(Exception):
+    def __init__(self, value, message="numberOfRooms harus lebih dari 0"):
+        self.value = value
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.message} (input: {self.value})'
+
+
+class InvalidMinFloorError(Exception):
+    def __init__(self, value, message="minFloor harus lebih dari 0"):
+        self.value = value
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.message} (input: {self.value})'
+
+
+class InvalidMaxFloorError(Exception):
+    def __init__(self, value, message="maxFloor tidak boleh lebih dari 30"):
+        self.value = value
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.message} (input: {self.value})'
+
+
+class Hotel:
+    def __init__(self, address, numberOfRooms, minFloor, maxFloor):
+        self.address = address
+        self.numberOfRooms = numberOfRooms
+        self.minFloor = minFloor
+        self.maxFloor = maxFloor
+
+    @property
+    def numberOfRooms(self):
+        return self._numberOfRooms
+
+    @numberOfRooms.setter
+    def numberOfRooms(self, value):
+        if value <= 0:
+            raise InvalidRoomError(value)
+        self._numberOfRooms = value
+
+    @property
+    def minFloor(self):
+        return self._minFloor
+
+    @minFloor.setter
+    def minFloor(self, value):
+        if value <= 0:
+            raise InvalidMinFloorError(value)
+        self._minFloor = value
+
+    @property
+    def maxFloor(self):
+        return self._maxFloor
+
+    @maxFloor.setter
+    def maxFloor(self, value):
+        if value > 30:
+            raise InvalidMaxFloorError(value)
+        self._maxFloor = value
+
+
+# ===== kode di main program (pengujian) =====
+
+# Pengujian 1: data valid
+try:
+    hotel1 = Hotel("Jl. Merdeka No. 1", 50, 1, 10)
+    print("Hotel 1 berhasil dibuat")
+    print(f"Alamat        : {hotel1.address}")
+    print(f"Jumlah Kamar  : {hotel1.numberOfRooms}")
+    print(f"Lantai Min    : {hotel1.minFloor}")
+    print(f"Lantai Maks   : {hotel1.maxFloor}")
+except (InvalidRoomError, InvalidMinFloorError, InvalidMaxFloorError) as e:
+    print(f"Gagal membuat hotel: {e}")
+
+print("-" * 40)
+
+# Pengujian 2: numberOfRooms <= 0
+try:
+    hotel2 = Hotel("Jl. Sudirman No. 2", 0, 1, 10)
+    print("Hotel 2 berhasil dibuat")
+except InvalidRoomError as e:
+    print(f"Error numberOfRooms: {e}")
+
+print("-" * 40)
+
+# Pengujian 3: minFloor <= 0
+try:
+    hotel3 = Hotel("Jl. Thamrin No. 3", 20, -1, 10)
+    print("Hotel 3 berhasil dibuat")
+except InvalidMinFloorError as e:
+    print(f"Error minFloor: {e}")
+
+print("-" * 40)
+
+# Pengujian 4: maxFloor > 30
+try:
+    hotel4 = Hotel("Jl. Gatot Subroto No. 4", 100, 1, 35)
+    print("Hotel 4 berhasil dibuat")
+except InvalidMaxFloorError as e:
+    print(f"Error maxFloor: {e}")
