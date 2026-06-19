@@ -1,0 +1,75 @@
+class Player:
+    def __init__(self, nama, rating):
+        self.nama = nama
+        self.rating = rating
+        self.poin: float = 0
+    def __str__(self):
+        return f"Player : {self.nama}\nRating : {self.rating}"
+
+class Match:
+    def __init__(self, home: Player, away: Player, result):
+        self.home = home
+        self.away = away
+        self.result = result
+    def matchPoint(self):
+        if self.result == "home menang":
+            self.home.poin += 1
+        elif self.result == "seri":
+            self.home.poin += 0.5
+            self.away.poin += 0.5
+        elif self.result == "home kalah":
+            self.away.poin += 1
+        else:
+            raise ValueError("Invalid result")
+    def matchResult(self):
+        if self.result == "home menang":
+            print(
+                f"{self.home.nama} vs {self.away.nama} : "
+                f"{self.home.nama} menang (+1 point for home)")
+        elif self.result == "home kalah":
+            print(
+                f"{self.home.nama} vs {self.away.nama} : "
+                f"{self.away.nama} menang (+1 point for away)")
+        elif self.result == "seri":
+            print(
+                f"{self.home.nama} vs {self.away.nama} : "
+                f"seri (+0.5 point for each)")
+
+class Tournament:
+    def __init__(self):
+        self.matches = []
+        self.players = []
+    def addPlayer(self, player: Player):
+        self.players.append(player)
+    def addMatches(self, match: Match):
+        self.matches.append(match)
+        match.matchPoint()
+        match.matchResult()
+    def viewFinalRank(self):
+        print("\n=== Peringkat Akhir ===")
+        sortedScore = sorted(
+            self.players,
+            key=lambda x: (-x.poin, -x.rating) )
+        for i, player in enumerate(sortedScore, start=1):
+            print(
+                f"{i}. {player.nama} - "
+                f"{player.poin} poin ({player.rating})")
+
+# Untuk Membuat pemainnya
+a = Player("Krisna", 50)
+b = Player("Bima", 99)
+c = Player("Danu", 100)
+d = Player("Fahreza", 20)
+e = Player("Fathul", 30)
+f = Player("Hisyam", 40)
+# Untuk Membuat turnamen
+chess = Tournament()
+# untuk menambahkan pemain ke turnamennya
+for player in [a, b, c, d, e, f]:
+    chess.addPlayer(player)
+# untuk menambahkan pertandingannya
+chess.addMatches(Match(a, b, "home menang"))
+chess.addMatches(Match(c, d, "home kalah"))
+chess.addMatches(Match(e, f, "seri"))
+# untuk Menampilkan peringkat akhir
+chess.viewFinalRank()
