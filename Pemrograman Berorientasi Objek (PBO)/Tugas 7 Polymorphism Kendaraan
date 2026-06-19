@@ -1,0 +1,18 @@
+class Mobil:
+    def suara(self):
+        print("\nMobil Bergerak dan Mengeluarkan Suara Mberrrrrrrrr")
+class pesawat:
+    def suara(self):
+        print("\nPesawat Bergerak dan Mengeluarkan Suara whussssssssssss")
+
+class kapal:
+    def suara(self):
+        print("\nKapal Bergerak dan Mengeluarkan Suara wishhh wishhh\n")
+
+m1 = Mobil()
+p1 = pesawat()
+k1 = kapal()
+m1.suara()
+p1.suara()
+k1.suara()
+    
